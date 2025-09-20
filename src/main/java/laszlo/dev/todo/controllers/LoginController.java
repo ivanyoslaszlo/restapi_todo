@@ -23,7 +23,7 @@ public class LoginController {
         this.userService = userService;
     }
 
-    @PostMapping("/")
+    @PostMapping("/login")
     public ResponseEntity<?> loginMethod(@RequestBody Map<String, String> payload, HttpSession session, HttpServletRequest request) {
         String username = payload.get("username");
         String password = payload.get("password");
