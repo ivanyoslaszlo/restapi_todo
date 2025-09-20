@@ -21,7 +21,6 @@ public class SecurityConfig {
         System.out.println(">>> SecurityConfig betöltve <<<");
     }
 
-
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> null;
@@ -42,8 +41,11 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOriginPatterns(List.of("*"));
-        configuration.setAllowedMethods(List.of("*"));
+        configuration.setAllowedOrigins(List.of(
+                "http://localhost:5500",
+                "https://ivanyoslaszlo.hu"
+        ));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
 

@@ -31,6 +31,7 @@ public class LoginController {
         String result = userService.loginUser(username, password, session);
 
 
+
         if ("Nincs ilyen felhasználó!".equals(result)) {
 
             return ResponseEntity.status(404).body(Map.of("message", "Nincs ilyen felhasználó!"));
@@ -41,7 +42,7 @@ public class LoginController {
 
         } else if (result.equals("user")) {
 
-            return ResponseEntity.ok(Map.of("role", "User"));
+            return ResponseEntity.ok(Map.of("role", "user"));
 
         } else if (result.equals("admin")) {
 
