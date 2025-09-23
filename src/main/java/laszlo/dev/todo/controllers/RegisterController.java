@@ -1,6 +1,7 @@
 package laszlo.dev.todo.controllers;
 
 import laszlo.dev.todo.entities.Users;
+import laszlo.dev.todo.service.EmailService;
 import laszlo.dev.todo.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,9 +16,11 @@ import java.util.Map;
 public class RegisterController {
 
     UserService userService;
+    EmailService emailService;
 
-    public RegisterController(UserService userService) {
+    public RegisterController(UserService userService, EmailService emailService) {
         this.userService = userService;
+        this.emailService=emailService;
 
     }
 
@@ -26,6 +29,7 @@ public class RegisterController {
 
       if (userService.registerUser(users))
       {
+          emailService.sendEmail(users.getEmail(),users.getUsername());
           return "siker";
       }else
       {
