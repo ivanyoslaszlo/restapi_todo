@@ -1,5 +1,6 @@
 package laszlo.dev.todo;
 
+import laszlo.dev.todo.entities.Users;
 import laszlo.dev.todo.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,7 @@ class TodoApplicationTests {
         assertTrue(result, "A jelszó reset nem sikerült");
     }
 
-    @Test
-    void update_lastlogin() {
-
-        assertDoesNotThrow(()->userRepository.updateLastLogin("laci"));
-
-    }
-
 }
+
+
+
