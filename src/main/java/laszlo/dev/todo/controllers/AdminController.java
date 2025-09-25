@@ -6,12 +6,9 @@ import laszlo.dev.todo.repository.NotesRepository;
 import laszlo.dev.todo.repository.UserRepository;
 import laszlo.dev.todo.service.NotesService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -36,7 +33,7 @@ public class AdminController {
 
         }else {
 
-            List<Users> users=notesService.getAlluserwithNotes();
+            List<Users> users=notesService.felhasznalok_jegyzetek_listazasa();
 
             return ResponseEntity.ok().body(users);
 

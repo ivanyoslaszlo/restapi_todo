@@ -3,6 +3,8 @@ package laszlo.dev.todo.service;
 import laszlo.dev.todo.entities.Users;
 import laszlo.dev.todo.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
+import org.apache.coyote.Response;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -12,6 +14,8 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    @Autowired
+    EmailService emailService;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -29,7 +33,7 @@ public class UserService {
         }
 
         user.setPassword(userRepository.password_hash(user.getPassword()));
-        userRepository.save(user);
+        userRepository.register_user(user);
 
         return true;
     }
@@ -60,16 +64,30 @@ public class UserService {
         }
     }
 
-    public boolean reset_password(String username,String password){
+    public boolean reset_password(String username, String password) {
 
-        if ( userRepository.reset_password(username,password)){
+        if (userRepository.reset_password(username, password)) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
 
     }
+
+
+    public boolean delete_user(String username) {
+
+         Users user=userRepository.findByUsername(username);
+
+        if (userRepository.delete_users(username)) {
+            emailService.send_DeletedAccount_email(user.getEmail(),username);
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+
 }
 
