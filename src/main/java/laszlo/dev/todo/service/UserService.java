@@ -16,6 +16,16 @@ public class UserService {
     @Autowired
     EmailService emailService;
 
+    public boolean checkIfBanned(String username){
+
+        if (userRepository.isbanned(username)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     public void banuser(String username, String action) {
 
         if (action.equals("ban")){

@@ -26,6 +26,30 @@ public class UserRepository {
         return DriverManager.getConnection(url, username, password);
     }
 
+    public boolean isbanned(String username) {
+
+
+        String sql = "select isbanned from users where username=?";
+        try {
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()){
+                return resultSet.getBoolean("isbanned");
+            }
+            else {
+                return false;
+            }
+
+
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public boolean bannusers(String username) {
 
