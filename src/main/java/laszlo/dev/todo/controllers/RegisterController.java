@@ -33,7 +33,7 @@ public class RegisterController {
     public String register_user(@RequestBody Users users) {
 
         if (userService.registerUser(users)) {
-            emailService.send_Registration_Email(users.getEmail(), users.getUsername());
+            emailService.sendRegistrationEmail(users.getEmail(), users.getUsername());
             return "siker";
         } else {
             return "foglalt";

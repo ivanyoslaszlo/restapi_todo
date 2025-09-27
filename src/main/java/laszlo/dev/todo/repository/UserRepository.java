@@ -16,17 +16,47 @@ import java.util.List;
 public class UserRepository {
 
 
+    private String sql = "";
 
     private Connection getConnection() throws SQLException {
 
-         final String url = "jdbc:mysql://localhost:3306/user_datas";
-         String username = "laci";
-         String password = "laci";
+        final String url = "jdbc:mysql://localhost:3306/user_datas";
+        String username = "laci";
+        String password = "laci";
         return DriverManager.getConnection(url, username, password);
     }
 
 
+    public boolean bannusers(String username) {
 
+        String sql = "update  users set isbanned =true where username =?";
+        try {
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, username);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public boolean unbanusers(String username) {
+        String sql = "update  users set isbanned =false where username =?";
+        try {
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, username);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
     public int get_userID(String username) {
 
@@ -135,7 +165,7 @@ public class UserRepository {
     }
 
     public String password_hash(String password) {
-          BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder.encode(password);
     }
 

@@ -3,7 +3,6 @@ package laszlo.dev.todo.service;
 import laszlo.dev.todo.entities.Users;
 import laszlo.dev.todo.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +15,17 @@ public class UserService {
 
     @Autowired
     EmailService emailService;
+
+    public void banuser(String username, String action) {
+
+        if (action.equals("ban")){
+            userRepository.bannusers(username);
+
+        }else if(action.equals("unban"))
+        {
+            userRepository.unbanusers(username);
+        }
+    }
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -77,10 +87,10 @@ public class UserService {
 
     public boolean delete_user(String username) {
 
-         Users user=userRepository.findByUsername(username);
+        Users user = userRepository.findByUsername(username);
 
         if (userRepository.delete_users(username)) {
-            emailService.send_DeletedAccount_email(user.getEmail(),username);
+            emailService.sendDeletedAccountemail(user.getEmail(), username);
             return true;
         } else {
             return false;

@@ -28,16 +28,16 @@ class TodoApplicationTests {
 
      */
 
-/*
-    @Test
-    void id() {
-        int id = userRepository.get_userID("laci");
-        System.out.println("Id:" + id);
-        assertTrue(id>0);
-    }
+    /*
+        @Test
+        void id() {
+            int id = userRepository.get_userID("laci");
+            System.out.println("Id:" + id);
+            assertTrue(id>0);
+        }
 
 
- */
+     */
     /*
     @Test
     void create_notes(){
@@ -47,6 +47,7 @@ class TodoApplicationTests {
     }
 
      */
+    /*
 @Test
 void testGetNotes() {
 
@@ -64,7 +65,21 @@ void testGetNotes() {
     assertTrue(notes.contains("nyolcadik jegyzet"));
 
 
-}
+     */
+    @Test
+    void ban() {
+        String username ="laci";
+
+        userRepository.bannusers(username);
+
+    }
+    @Test
+    void unban() {
+        String username ="laci";
+
+        userRepository.unbanusers(username);
+
+    }
 
 
 }

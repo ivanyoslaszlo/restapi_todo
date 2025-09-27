@@ -17,7 +17,24 @@ public class EmailService {
         }
 
 
-        public void send_Registration_Email(String to, String username) {
+
+        private void send_Email(String to,String subject,String text){
+
+            SimpleMailMessage message=new SimpleMailMessage();
+            message.setFrom("lacitodo@gmail.com");
+            message.setTo(to);
+            message.setSubject(subject);
+            message.setText(text);
+            try {
+                mailSender.send(message);
+                System.out.println("Email kiküldve!");
+            }catch (Exception e){
+                System.out.println("hiba az email küldésekor: "+e);
+            }
+        }
+
+        public void sendRegistrationEmail(String to, String username) {
+
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom("lacitodo@gmail.com");
             message.setTo(to);
@@ -37,9 +54,7 @@ public class EmailService {
 
 
         }
-
-
-        public void send_DeletedAccount_email(String to,String username){
+        public void sendDeletedAccountemail(String to, String username){
 
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom("lacitodo@gmail.com");
