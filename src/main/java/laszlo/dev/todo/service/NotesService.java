@@ -77,7 +77,9 @@ public class NotesService {
         for (Users user : users) {
 
             user.setNotes(notesRepository.getNotes(user.getUsername()));
+
         }
+        users.removeIf(user ->user.getRole().equalsIgnoreCase("admin"));
         return users;
     }
 

@@ -66,7 +66,7 @@ public class LoginController {
     }
 
 
-    @PostMapping("/kilepes")
+    @PostMapping("/logout")
     public ResponseEntity<?> logoutMethod(HttpSession session) {
         System.out.println("Kilépet: "+session.getAttribute("user")+ LocalDateTime.now().withNano(0));
         session.invalidate();

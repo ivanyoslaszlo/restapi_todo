@@ -7,6 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -65,7 +69,7 @@ void testGetNotes() {
     assertTrue(notes.contains("nyolcadik jegyzet"));
 
 
-     */
+
     @Test
     void ban() {
         String username ="laci";
@@ -80,6 +84,10 @@ void testGetNotes() {
         userRepository.unbanusers(username);
 
     }
+
+     */
+
+
 
 
 }
