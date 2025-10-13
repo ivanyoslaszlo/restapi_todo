@@ -3,6 +3,8 @@ package laszlo.dev.todo.service;
 import laszlo.dev.todo.entities.Users;
 import laszlo.dev.todo.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +14,7 @@ import java.time.LocalDateTime;
 public class UserService {
 
     private final UserRepository userRepository;
-
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     @Autowired
     EmailService emailService;
 
@@ -63,16 +65,17 @@ public class UserService {
         Users user = userRepository.findByUsername(username);
 
         if (user == null) {
+
             return "Nincs ilyen felhasználó!";
 
         } else if (!userRepository.check_password(password, user.getPassword())) {
-
+                logger.warn(username+" hibás jelszot adott meg!");
             return "Hibás jelszó!";
         } else if (userRepository.check_password(password, user.getPassword())) {
 
             session.setAttribute("user", user.getUsername());
             session.setAttribute("login_time", LocalDateTime.now().withNano(0));
-            System.out.println("Bejelentkezett: " + user.getUsername() + " " + session.getAttribute("login_time"));
+          logger.info("Belépett: "+session.getAttribute("user")+" "+session.getAttribute("login_time"));
             userRepository.updateLastLogin(user.getUsername());
 
         }
