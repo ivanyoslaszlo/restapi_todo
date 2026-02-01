@@ -105,7 +105,7 @@ public class UserService {
         Users user = userRepository.findByUsername(username);
 
         if (userRepository.delete_users(username)) {
-            emailService.sendDeletedAccountemail(user.getEmail(), username);
+            emailService.sendDeletedAccountEmail(user.getEmail(), username);
             logger.info(username + " deleted their account");
             return true;
         } else {

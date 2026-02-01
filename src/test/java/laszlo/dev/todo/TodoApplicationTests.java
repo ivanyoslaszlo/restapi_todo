@@ -90,7 +90,7 @@ void testGetNotes() {
 
     }
 
-     */
+
 
     @Test
     void log() {
@@ -109,10 +109,15 @@ void testGetNotes() {
     }
 
 
+     */
+/*
   @Test
-    void test(){
-        emailService.sendRegistrationEmail("ivanyoslaszlo25@gmail.com","Laci");
+    void test() throws InterruptedException {
+        emailService.send_Email("ivanyoslaszlo25@gmail.com","test","brevo is working");
+
   }
+
+ */
 
 }
 
