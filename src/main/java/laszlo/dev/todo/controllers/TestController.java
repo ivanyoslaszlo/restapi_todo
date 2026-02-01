@@ -35,7 +35,7 @@ public class TestController {
             ping.put("Database", "Offline");
         }
 
-        emailService.send_Email("ivanyoslaszlo25@gmail.com", "test", "EmailService is working!");
+
         return ResponseEntity.ok().body(ping);
     }
 
