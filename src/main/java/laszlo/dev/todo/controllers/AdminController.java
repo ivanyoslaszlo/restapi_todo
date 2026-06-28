@@ -36,9 +36,7 @@ public class AdminController {
             return ResponseEntity.status(403).body("Permission denied");
 
         } else {
-
             List<Users> users = notesService.getNote();
-
             return ResponseEntity.ok().body(users);
         }
     }
